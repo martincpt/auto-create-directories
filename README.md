@@ -2,7 +2,9 @@
 A simple utility to automatically create and manage required directories.
 
 ## Installation
-`pip install git+https://github.com/martincpt/auto-create-directories.git`
+```
+pip install git+https://github.com/martincpt/auto-create-directories.git
+```
 
 ## Typical Usage / Quickstart
 
