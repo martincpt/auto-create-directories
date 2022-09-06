@@ -5,7 +5,7 @@ from typing import Literal, Any
 BaseDirLiterals = Literal["CURRENT_DIRECTORY", "PARENT_DIRECTORY"]
 
 class AutoCreateDirectories:
-    """Utility class to automatically create directories in the given directory.
+    """Utility class to automatically create directories in a given directory.
 
     Args:
         dirs (list[str] | str, optional): The list of (or single) directory name(s) to create. Defaults to [].
