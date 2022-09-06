@@ -2,6 +2,8 @@ import os
 
 from typing import Literal, Any
 
+HOME_DIR = os.path.expanduser("~")
+
 BaseDirLiterals = Literal["CURRENT_DIRECTORY", "PARENT_DIRECTORY"]
 
 class AutoCreateDirectories:
