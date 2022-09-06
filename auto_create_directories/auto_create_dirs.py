@@ -59,7 +59,7 @@ class AutoCreateDirectories:
             self.base_dir = base_dir
         else:
             # but it must exists
-            raise ValueError("`base_dir` must be an absolute path and it needs to exist or one of the BaseDirLiterals.")
+            raise ValueError("`base_dir` should be either an absolute path which already exists or one of the BaseDirLiterals.")
 
     def get_path(self, *args: list[str]) -> str:
         """A shortcut for os.path.join"""
