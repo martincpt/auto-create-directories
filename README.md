@@ -1,7 +1,30 @@
 # Auto Create Directories
 A simple utility to automatically create and manage required directories.
 
-## Usage
+## Typical Usage / Quickstart
+
+Assuming in your module, you need the following folder structure.
+```
+module/
+├── main.py
+├── datasets/   <not exists>
+└── results/    <not exists>
+    └── models/ <not exists>
+```
+
+```python
+# in your main.py
+from auto_create_directories import AutoCreateDirectories
+
+auto_create_dirs = AutoCreateDirectories(["datasets", "results/models"], __file__)
+
+# if you need the absolute path of one of them
+datasets_path = auto_create_dirs.get("datasets")
+results_path = auto_create_dirs.get("results")
+models_path = auto_create_dirs.get("results/models")
+```
+
+## More examples
 ```python 
 from auto_create_directories import AutoCreateDirectories
 
