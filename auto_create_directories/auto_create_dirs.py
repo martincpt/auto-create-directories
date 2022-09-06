@@ -1,29 +1,27 @@
+from genericpath import isfile
 import os
 
 from typing import Literal, Any
 
 HOME_DIR = os.path.expanduser("~")
+ROOT_DIR = os.path.abspath(os.sep)
 
-BaseDirLiterals = Literal["CURRENT_DIRECTORY", "PARENT_DIRECTORY"]
+BaseDirLiterals = Literal["~", "HOME", "ROOT"]
 
 class AutoCreateDirectories:
     """Utility class to automatically create directories in a given directory.
 
     Args:
         dirs (list[str] | str, optional): The list of (or single) directory name(s) to create. Defaults to [].
-        base_dir (str | BaseDirLiterals, optional): An absolute path to be used as base directory or one of the BaseDirLiterals. Defaults to "CURRENT_DIRECTORY".
-        relative_file (str, optional): The relative file in case of a BaseDirLiterals was set. Defaults to __file__.
+        base_dir (str | BaseDirLiterals, optional): An absolute path to be used as base directory or one of the BaseDirLiterals. Defaults to "HOME_DIR".
     """ 
 
-    def __init__(self, dirs: list[str]|str  = [], base_dir: str|BaseDirLiterals = "CURRENT_DIRECTORY", relative_file: str = __file__) -> None:             
+    def __init__(self, dirs: list[str]|str  = [], base_dir: str|BaseDirLiterals = HOME_DIR) -> None:             
         # make dirs iterable
         dirs = dirs if isinstance(dirs, list) else [dirs]
 
         # dirs dictionary will hold created directories
         self.dirs = {}
-
-        # set relative file
-        self.relative_file = relative_file
 
         # set base dir
         self.set_base_dir(base_dir)
@@ -42,17 +40,19 @@ class AutoCreateDirectories:
             ValueError: If invalid base_dir value was given.
         """
 
-        # get the relative file's holding directory
-        current_dir = os.path.dirname(os.path.abspath(self.relative_file))
-        
-        # handle special literals
-        if base_dir == "CURRENT_DIRECTORY":
-            # use current directory as the base
-            self.base_dir = current_dir
+        # if filepath passed
+        if os.path.isfile(base_dir):
+            # use its parent directory
+            self.base_dir = os.path.dirname(os.path.abspath(base_dir))
             return
-        if base_dir == "PARENT_DIRECTORY":
-            # use current directory's parent as the base
-            self.base_dir = os.path.dirname(current_dir) 
+        # handle special literals
+        if base_dir in ["HOME", "~"]:
+            # set home folder as the base
+            self.base_dir = HOME_DIR
+            return
+        if base_dir == "ROOT":
+            # set drive's root as the base
+            self.base_dir = ROOT_DIR
             return
         
         # any other case: handle as absolute path
