@@ -1,6 +1,9 @@
 # Auto Create Directories
 A simple utility to automatically create and manage required directories.
 
+## Installation
+`pip install git+https://github.com/martincpt/auto-create-directories.git`
+
 ## Typical Usage / Quickstart
 
 Assuming in your module, you need the following folder structure.
