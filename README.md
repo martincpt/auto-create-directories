@@ -11,7 +11,8 @@ auto_create_dirs_single = AutoCreateDirectories("single_dir")
 auto_create_dirs_multiply = AutoCreateDirectories(["multiply", "directories"])
 
 # and they also can be created later on
-new_dir_abs_path = auto_create_dirs.create("new_dir")
+auto_create_dirs.create("new_dir")
+auto_create_dirs.create("another_dir/even_with_child")
 
 # AutoCreateDirectories.get also creates the directory if it doesn't exist
 # and returns with the absolute path (.get and .create are aliases)
@@ -22,7 +23,7 @@ another_dir = auto_create_dirs.get("another_dir")
 auto_create_dirs = AutoCreateDirectories(base_dir = "/path/to/my/awesome/module")
 
 # you can pass a filepath too, then its parent directory will be used
-auto_create_dirs = AutoCreateDirectories(base_dir = ""/even/filepath/works/but_its_parent_will_be_used.py")
+auto_create_dirs = AutoCreateDirectories(base_dir = "/even/filepath/works/but_its_parent_will_be_used.py")
 
 # in most cases, you probably want to create directories relative to your current file
 # this can be really simple by passing the __file__ variable
