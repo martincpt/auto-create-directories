@@ -20,8 +20,8 @@ setup(
         "setuptools>=45.0",
     ],
     classifiers=[
-        "Development Status :: 1 - Planning",
         "Programming Language :: Python :: 3.0",
         "Topic :: Utilities",
+        "Development Status :: 3 - Alpha",
     ],
 )
