@@ -1,5 +1,7 @@
 # Auto Create Directories (for python)
-A simple python utility to automatically create and manage required directories.
+A simple python utility to automatically create and manage required directories. 
+
+For example, you may have larger directories you may not necessarily want to upload to your git but when you run your code, you have to make sure they exist.
 
 ## Installation
 ```
@@ -8,7 +10,7 @@ pip install git+https://github.com/martincpt/auto-create-directories.git
 
 ## Typical Usage / Quickstart
 
-Assuming in your module, you need the following folder structure.
+Assuming you need the following folder structure in your project. 
 ```
 module/
 ├── main.py
@@ -28,6 +30,9 @@ datasets_path = auto_create_dirs.get("datasets")
 results_path = auto_create_dirs.get("results")
 models_path = auto_create_dirs.get("results/models")
 ```
+
+## It's safe
+Even if they already exist, it's safe to call repetitively. It won't override your existing directories.
 
 ## More examples
 ```python 
@@ -59,4 +64,4 @@ auto_create_dirs = AutoCreateDirectories(base_dir = __file__)
 ```
 
 ## Note
-For safety reasons this library is not capable to remove directories. It is meant for quickly setup and create required folder structures of your modules.
+For safety reasons this library **is not capable to remove directories**. It is meant for quickly setup and create required folder structures in your modules.
