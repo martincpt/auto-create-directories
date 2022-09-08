@@ -40,8 +40,8 @@ class AutoCreateDirectories_TestCase(unittest.TestCase):
         self.assertEqual(auto_create_dirs_home_short.base_dir, HOME_DIR)
 
         # test base dir literal: ROOT
-        auto_create_dirs_parent = AutoCreateDirectories(base_dir = "ROOT")
-        self.assertEqual(auto_create_dirs_parent.base_dir, ROOT_DIR)
+        auto_create_dirs_root = AutoCreateDirectories(base_dir = "ROOT")
+        self.assertEqual(auto_create_dirs_root.base_dir, ROOT_DIR)
 
         # test with abs path directly
         auto_create_dirs_abs_path = AutoCreateDirectories(base_dir = self.current_dir)
@@ -67,6 +67,17 @@ class AutoCreateDirectories_TestCase(unittest.TestCase):
     def test_auto_create_dirs_shortcut(self) -> None:
         instance = auto_create_dirs()
         self.assertTrue(isinstance(instance, AutoCreateDirectories))
+
+    def test_extra_get_root_dir_when_sub_created(self) -> None:
+        sub_dir = os.path.join(TEST_DIR, 'subdir')
+        sub_dir_abs_path = os.path.join(self.test_dir_path, 'subdir')
+        sub_dir_root = os.path.dirname(sub_dir_abs_path)
+        auto_create_dirs = AutoCreateDirectories(dirs = [sub_dir], base_dir = self.current_file)
+        result = auto_create_dirs.get(TEST_DIR)
+        self.assertEqual(result, sub_dir_root)
+        # clean up
+        os.rmdir(sub_dir_abs_path)
+        
 
 
 if __name__ == '__main__':
