@@ -52,13 +52,6 @@ class AutoCreateDirectories_TestCase(unittest.TestCase):
         with self.assertRaises(ValueError):
             AutoCreateDirectories(base_dir = invalid_path)
 
-    def test_get_path(self) -> None:
-        auto_create_dirs = AutoCreateDirectories()
-        path_parts = ['simple', 'path', 'to', 'join']
-        path_correct = 'simple/path/to/join'
-        path = auto_create_dirs.get_path(*path_parts)
-        self.assertEqual(str(path), path_correct)
-
     def test_get(self) -> None:
         auto_create_dirs = AutoCreateDirectories(dirs = TEST_DIR, base_dir = self.current_file)
         test_dir_path = auto_create_dirs.get(TEST_DIR)
@@ -67,6 +60,21 @@ class AutoCreateDirectories_TestCase(unittest.TestCase):
     def test_auto_create_dirs_shortcut(self) -> None:
         instance = auto_create_dirs()
         self.assertTrue(isinstance(instance, AutoCreateDirectories))
+
+    def test_join_path(self) -> None:
+        auto_create_dirs = AutoCreateDirectories()
+        path_parts = ('simple', 'path', 'to', 'join')
+        path_correct = 'simple/path/to/join'
+        path = auto_create_dirs.join_path(*path_parts)
+        self.assertEqual(str(path), path_correct)
+
+    def test_is_file(self) -> None:
+        path = self.current_file
+        self.assertTrue(AutoCreateDirectories.is_file(path))
+
+    def test_is_dir(self) -> None:
+        path = self.current_dir
+        self.assertTrue(AutoCreateDirectories.is_dir(path))
 
     def test_extra_get_root_dir_when_sub_created(self) -> None:
         sub_dir = os.path.join(TEST_DIR, 'subdir')

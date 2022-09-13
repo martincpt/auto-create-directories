@@ -41,7 +41,7 @@ class AutoCreateDirectories:
         """
 
         # if filepath passed
-        if os.path.isfile(base_dir):
+        if self.is_file(base_dir):
             # use its parent directory
             self.base_dir = os.path.dirname(os.path.abspath(base_dir))
             return
@@ -62,10 +62,6 @@ class AutoCreateDirectories:
         else:
             # but it must exists
             raise ValueError("`base_dir` should be either an absolute path which already exists or one of the BaseDirLiterals.")
-
-    def get_path(self, *args: list[str]) -> str:
-        """A shortcut for os.path.join"""
-        return os.path.join(*args)
 
     def create(self, dir: str) -> str:
         """Gets or creates the given directory. 
@@ -103,6 +99,21 @@ class AutoCreateDirectories:
         self.dirs[dir] = dir_abs_path
 
         return dir_abs_path
+
+    @classmethod
+    def join_path(cls, *args: list[str]) -> str:
+        """A shortcut for os.path.join()"""
+        return os.path.join(*args)
+
+    @classmethod
+    def is_file(cls, path: str) -> bool:
+        """A shortcut for os.path.isfile()"""
+        return os.path.isfile(path)
+
+    @classmethod
+    def is_dir(cls, path: str) -> bool:
+        """A shortcut for os.path.isdir()"""
+        return os.path.isdir(path)
 
 
 def auto_create_dirs(*args, **kwargs) -> AutoCreateDirectories:
