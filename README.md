@@ -1,4 +1,7 @@
 # Auto Create Directories (for python)
+
+![Requirement: Python >= 3.10](https://img.shields.io/badge/Python-%3E%3D%203.10-blue)
+
 A simple python utility to automatically create and manage required directories. 
 
 For example, you may have larger directories you may not necessarily want to upload to your git but when you run your code, you have to make sure they exist.
