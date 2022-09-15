@@ -4,7 +4,7 @@
 
 A simple python utility to automatically create and manage required directories. 
 
-For example, you may have larger directories you may not necessarily want to upload to your git but when you run your code, you have to make sure they exist.
+For example, you may have folders with dynamically created contents, or larger directories that not necessarily part of your package but when you run your code, you have to make sure they exist.
 
 ## Installation
 ```
